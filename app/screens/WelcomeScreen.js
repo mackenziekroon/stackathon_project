@@ -1,38 +1,38 @@
 import React from "react";
-import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
+import {
+  ImageBackground,
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  Button,
+} from "react-native";
 
 function WelcomeScreen(props) {
   return (
-    <ImageBackground
-      style={styles.background}
-      source={require("../assets/corgi.jpg")}
-    >
+    <View style={styles.background}>
       <View style={styles.logoContainer}>
         <Image style={styles.logo} source={require("../assets/icon.png")} />
-        <Text>Tagline :)</Text>
+        <Text>Welcome</Text>
       </View>
-
-      <View style={styles.loginButton}></View>
-      <View style={styles.registerButton}></View>
-    </ImageBackground>
+      <View style={styles.button} />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  button: {
+    backgroundColor: "#505168",
+    width: 200,
+    height: 50,
+    bottom: 450,
+    borderRadius: 70,
+  },
   background: {
+    backgroundColor: "#B3C0A4",
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
-  },
-  loginButton: {
-    width: "100%",
-    height: 70,
-    backgroundColor: "#B3C0A4",
-  },
-  registerButton: {
-    width: "100%",
-    height: 70,
-    backgroundColor: "#505168",
   },
   logo: {
     width: 100,
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     position: "absolute",
-    top: 70,
+    top: 170,
     alignItems: "center",
   },
 });
