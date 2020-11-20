@@ -11,7 +11,9 @@ import {
 } from "react-native";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
+import QuestionScreen from "./app/screens/QuestionScreen";
 
 export default function App() {
-  return <WelcomeScreen />;
+  // return <WelcomeScreen />;
+  return <QuestionScreen />;
 }

@@ -23,7 +23,7 @@ function WelcomeScreen(props) {
       <View style={styles.logoContainer}>
         <FontAwesome5 name="dog" size={70} color="#eaefd3" />
         {/* <Image style={styles.logo} source={require("../assets/icon.png")} /> */}
-        <Text style={styles.text}>Welcome</Text>
+        <Text style={styles.text}>Woof Woof</Text>
       </View>
       <View style={styles.buttonContainer}>
         <AppButton
