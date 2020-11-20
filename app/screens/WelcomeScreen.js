@@ -6,43 +6,34 @@ import {
   Image,
   Text,
   Button,
+  Alert,
 } from "react-native";
+
+import AppButton from "../components/AppButton";
+
+import styles from "../components/styles";
+
+import { FontAwesome5 } from "@expo/vector-icons";
+
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 function WelcomeScreen(props) {
   return (
     <View style={styles.background}>
       <View style={styles.logoContainer}>
-        <Image style={styles.logo} source={require("../assets/icon.png")} />
-        <Text>Welcome</Text>
+        <FontAwesome5 name="dog" size={70} color="#eaefd3" />
+        {/* <Image style={styles.logo} source={require("../assets/icon.png")} /> */}
+        <Text style={styles.text}>Welcome</Text>
       </View>
-      <View style={styles.button} />
+      <View style={styles.buttonContainer}>
+        <AppButton
+          title="Get Started"
+          accessibilityLabel="Get Started"
+          onPress={() => console.log("tapped!")}
+        />
+      </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: "#505168",
-    width: 200,
-    height: 50,
-    bottom: 450,
-    borderRadius: 70,
-  },
-  background: {
-    backgroundColor: "#B3C0A4",
-    flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
-  logo: {
-    width: 100,
-    height: 100,
-  },
-  logoContainer: {
-    position: "absolute",
-    top: 170,
-    alignItems: "center",
-  },
-});
 
 export default WelcomeScreen;
