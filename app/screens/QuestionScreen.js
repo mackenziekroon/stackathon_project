@@ -4,6 +4,15 @@ import { StyleSheet, View, Image, Text } from "react-native";
 import AppButton from "../components/AppButton";
 
 function QuestionScreen(props) {
+  const answerValidation = (answer) => {
+    let correctAnswer = "husky";
+    if (answer === correctAnswer) {
+      alert("Correct!");
+    } else {
+      alert("Try Again...");
+    }
+  };
+
   return (
     <View style={styles.background}>
       <View style={styles.imageContainer}>
@@ -13,30 +22,30 @@ function QuestionScreen(props) {
       {/* <View style={styles.answersContainer}> */}
       <View style={styles.answerOne}>
         <AppButton
-          title="Answer One"
-          accessibilityLabel="Answer One"
-          onPress={() => console.log("1")}
+          title="husky"
+          // accessibilityLabel="husky"
+          onPress={() => answerValidation("husky")}
         />
       </View>
       <View style={styles.answerTwo}>
         <AppButton
-          title="Answer Two"
-          accessibilityLabel="Answer Two"
-          onPress={() => console.log("2")}
+          title="german shepherd"
+          // accessibilityLabel="husky"
+          onPress={() => answerValidation("german shepherd")}
         />
       </View>
       <View style={styles.answerThree}>
         <AppButton
-          title="Answer Three"
-          accessibilityLabel="Answer Three"
-          onPress={() => console.log("3")}
+          title="beagle"
+          // accessibilityLabel="Answer Three"
+          onPress={() => answerValidation("beagle")}
         />
       </View>
       <View style={styles.answerFour}>
         <AppButton
-          title="Answer Four"
-          accessibilityLabel="Answer Four"
-          onPress={() => console.log("4")}
+          title="corgi"
+          // accessibilityLabel="Answer Four"
+          onPress={() => answer("corgi")}
         />
       </View>
     </View>
