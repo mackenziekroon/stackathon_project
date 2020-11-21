@@ -1,7 +1,7 @@
 import React from "react";
 
-import { StyleSheet, View, Image, Text, Button } from "react-native";
-// import AppButton from "../components/AppButton";
+import { StyleSheet, View, Image, Text } from "react-native";
+import AppButton from "../components/AppButton";
 
 function QuestionScreen(props) {
   return (
@@ -10,19 +10,34 @@ function QuestionScreen(props) {
         <Image style={styles.image} source={require("../assets/husky.png")} />
         <Text style={styles.font}>Guess the breed...</Text>
       </View>
-      <View style={styles.answersContainer}>
-        <View style={styles.buttonContainer}>
-          <Button
-            style={styles.answerOne}
-            title="Answer One"
-            accessibilityLabel="Answer One"
-            onPress={() => console.log("1")}
-          />
-        </View>
-        {/* <Button style={styles.answerOne}>Answer 1</Button>
-        <Button style={styles.answerTwo}>Answer 2</Button>
-        <Button style={styles.answerThree}>Answer 3</Button>
-        <Button style={styles.answerFour}>Answer 4</Button> */}
+      {/* <View style={styles.answersContainer}> */}
+      <View style={styles.answerOne}>
+        <AppButton
+          title="Answer One"
+          accessibilityLabel="Answer One"
+          onPress={() => console.log("1")}
+        />
+      </View>
+      <View style={styles.answerTwo}>
+        <AppButton
+          title="Answer Two"
+          accessibilityLabel="Answer Two"
+          onPress={() => console.log("2")}
+        />
+      </View>
+      <View style={styles.answerThree}>
+        <AppButton
+          title="Answer Three"
+          accessibilityLabel="Answer Three"
+          onPress={() => console.log("3")}
+        />
+      </View>
+      <View style={styles.answerFour}>
+        <AppButton
+          title="Answer Four"
+          accessibilityLabel="Answer Four"
+          onPress={() => console.log("4")}
+        />
       </View>
     </View>
   );
@@ -51,20 +66,34 @@ const styles = StyleSheet.create({
     textDecorationColor: "#505168",
     fontSize: 20,
   },
-  buttonContainer: {
-    padding: 20,
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    bottom: 430,
-  },
   answerOne: {
-    backgroundColor: "#505168",
-    borderRadius: 25,
-    justifyContent: "center",
+    // padding: 20,
+    width: "90%",
     alignItems: "center",
-    padding: 15,
-    width: "100%",
+    justifyContent: "center",
+    top: 220,
+    margin: 10,
+  },
+  answerTwo: {
+    width: "90%",
+    alignItems: "center",
+    justifyContent: "center",
+    top: 230,
+    margin: 10,
+  },
+  answerThree: {
+    width: "90%",
+    alignItems: "center",
+    justifyContent: "center",
+    top: 240,
+    margin: 10,
+  },
+  answerFour: {
+    width: "90%",
+    alignItems: "center",
+    justifyContent: "center",
+    top: 250,
+    margin: 10,
   },
 });
 
