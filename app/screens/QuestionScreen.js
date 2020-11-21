@@ -1,20 +1,26 @@
 import React from "react";
-
-import { StyleSheet, View, Image, Text } from "react-native";
+import ProgressBar from "react-native-progress/Bar";
+import { StyleSheet, View, Image, Text, Alert } from "react-native";
 import AppButton from "../components/AppButton";
 
 function QuestionScreen(props) {
   const answerValidation = (answer) => {
     let correctAnswer = "husky";
     if (answer === correctAnswer) {
-      alert("Correct!");
+      Alert.alert("Correct!");
     } else {
-      alert("Try Again...");
+      Alert.alert("Try again...");
     }
   };
 
   return (
     <View style={styles.background}>
+      <ProgressBar
+        progress={0.1}
+        width={375}
+        color={"#505168"}
+        style={styles.progress}
+      />
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={require("../assets/husky.png")} />
         <Text style={styles.font}>Guess the breed...</Text>
@@ -45,7 +51,7 @@ function QuestionScreen(props) {
         <AppButton
           title="corgi"
           // accessibilityLabel="Answer Four"
-          onPress={() => answer("corgi")}
+          onPress={() => answerValidation("corgi")}
         />
       </View>
     </View>
@@ -61,19 +67,23 @@ const styles = StyleSheet.create({
     padding: 20,
     top: 130,
   },
-  imageContainer: {
-    backgroundColor: "#eaefd3",
-    borderRadius: 25,
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-  },
+  // imageContainer: {
+  //   backgroundColor: "#eaefd3",
+  //   borderRadius: 25,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   width: "100%",
+  //   top: 100,
+  // },
   font: {
     justifyContent: "center",
     alignItems: "center",
     top: 160,
     textDecorationColor: "#505168",
     fontSize: 20,
+  },
+  progress: {
+    top: 30,
   },
   answerOne: {
     // padding: 20,

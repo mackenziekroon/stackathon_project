@@ -5,6 +5,7 @@ const { Question } = require("../db/models");
 router.get("/", async (req, res, next) => {
   try {
     let questions = await Question.findAll();
+    console.log(questions);
     res.send(questions);
   } catch (error) {
     next(error);

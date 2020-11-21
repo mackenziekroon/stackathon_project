@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api", require("./api"));
+app.use("/api", require("./server/api"));
 
 app.use((err, req, res, next) => {
   console.error(err);
