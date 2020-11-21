@@ -16,8 +16,13 @@ import styles from "../components/styles";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import QuestionScreen from "./QuestionScreen";
 
-function WelcomeScreen(props) {
+function WelcomeScreen({ navigation }) {
+  const pressHandler = () => {
+    navigation.navigate("Question");
+  };
+
   return (
     <View style={styles.background}>
       <View style={styles.logoContainer}>
@@ -29,7 +34,7 @@ function WelcomeScreen(props) {
         <AppButton
           title="Get Started"
           accessibilityLabel="Get Started"
-          onPress={() => console.log("tapped!")}
+          onPress={pressHandler}
         />
       </View>
     </View>
