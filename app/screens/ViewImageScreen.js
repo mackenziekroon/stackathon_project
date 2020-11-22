@@ -5,7 +5,7 @@ function ViewImageScreen(props) {
   return (
     <View styles={styles.container}>
       <View styles={styles.closeIcon}></View>
-      <Image styles={styles.images} source={require("../assets/husky.png")} />
+      <Image styles={styles.images} />
     </View>
   );
 }

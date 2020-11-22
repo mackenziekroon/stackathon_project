@@ -4,7 +4,6 @@ import { StyleSheet, View, Image, Text, Alert, FlatList } from "react-native";
 import AppButton from "../components/AppButton";
 
 function QuestionComponent({
-  id,
   question,
   image,
   answerOne,
@@ -14,11 +13,13 @@ function QuestionComponent({
   correctAnswer,
 }) {
   const answerValidation = (answer) => {
+    console.log("answer--->", answer);
+    console.log("correct--->", correctAnswer);
     let correct = correctAnswer;
     if (answer === correct) {
       Alert.alert("Correct!");
       this.setState({
-        score: this.state.score + 1,
+        // score: this.state.score + 1,
         currentQuestionIdx: this.state.currentQuestionIdx + 1,
         progressBar: this.state.progressBar + 0.1,
       });
@@ -31,35 +32,34 @@ function QuestionComponent({
   return (
     <>
       <View style={styles.imageContainer}>
-        <Image style={styles.image} source={image} />
-        <Text>{id}</Text>
+        <Image
+          source={{ uri: image }}
+          style={{ width: "100%", height: 200, top: 100 }}
+        />
+
         <Text style={styles.font}>{question}</Text>
       </View>
       <View style={styles.answerOne}>
         <AppButton
           title={answerOne}
-          // accessibilityLabel="husky"
           onPress={() => answerValidation(answerOne)}
         />
       </View>
       <View style={styles.answerTwo}>
         <AppButton
           title={answerTwo}
-          // accessibilityLabel="husky"
           onPress={() => answerValidation(answerTwo)}
         />
       </View>
       <View style={styles.answerThree}>
         <AppButton
           title={answerThree}
-          // accessibilityLabel="Answer Three"
           onPress={() => answerValidation(answerThree)}
         />
       </View>
       <View style={styles.answerFour}>
         <AppButton
           title={answerFour}
-          // accessibilityLabel="Answer Four"
           onPress={() => answerValidation(answerFour)}
         />
       </View>

@@ -18,12 +18,11 @@ class QuestionScreen extends React.Component {
 
   async componentDidMount() {
     const { data } = await questionsApi.getQuestions();
-
+    console.log(data);
     this.setState({
       questions: data,
       currentQuestion: [data[this.state.currentQuestionIdx]],
     });
-    console.log(this.state.currentQuestion);
   }
 
   render() {
@@ -37,18 +36,19 @@ class QuestionScreen extends React.Component {
           style={styles.progress}
         />
         <Text>Score: {this.state.score}</Text>
+
         <FlatList
           data={question}
           keyExtractor={(question) => question.id.toString()}
           renderItem={({ item }) => (
             <QuestionComponent
-              question="hello!"
-              // image={item.image}
+              question={item.question}
+              image={item.image}
               answerOne={item.answerOne}
               answerTwo={item.answerTwo}
               answerThree={item.answerThree}
               answerFour={item.answerFour}
-              correctAnswer={item.answerFour}
+              correctAnswer={item.correctAnswer}
             />
           )}
         />
