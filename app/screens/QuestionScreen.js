@@ -19,12 +19,13 @@ class QuestionScreen extends React.Component {
 
   async componentDidMount() {
     const { data } = await questionsApi.getQuestions();
+    // console.log("DATA", data);
 
     this.setState({
       questions: data,
-      // currentQuestion: this.state.questions[0],
+      currentQuestion: data[this.state.currentQuestionIdx],
     });
-    // console.log(this.state.currentQuestion);
+    console.log("current question", this.state.currentQuestion);
   }
 
   answerValidation(answer) {
