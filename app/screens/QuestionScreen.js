@@ -2,7 +2,7 @@ import React from "react";
 import ProgressBar from "react-native-progress/Bar";
 import { StyleSheet, View, Image, Text, Alert } from "react-native";
 import AppButton from "../components/AppButton";
-import { questionData } from "../../data";
+import questionsApi from "../../server/api/fetchingData";
 
 class QuestionScreen extends React.Component {
   constructor(props) {
@@ -11,8 +11,17 @@ class QuestionScreen extends React.Component {
       score: 0,
       currentQuestion: 0,
       progressBar: 0.1,
+      questions: [],
     };
     this.answerValidation = this.answerValidation.bind(this);
+  }
+
+  async componentDidMount() {
+    const { data } = await questionsApi.getQuestions();
+    console.log(data);
+    this.setState({
+      questions: [data],
+    });
   }
 
   answerValidation(answer) {
