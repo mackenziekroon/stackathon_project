@@ -1,8 +1,8 @@
 import React from "react";
 import ProgressBar from "react-native-progress/Bar";
-import { StyleSheet, View, Image, Text, Alert } from "react-native";
-import AppButton from "../components/AppButton";
+import { StyleSheet, View, Image, Text, Alert, FlatList } from "react-native";
 import questionsApi from "../../server/api/fetchingData";
+import QuestionComponent from "../components/QuestionComponent";
 
 class QuestionScreen extends React.Component {
   constructor(props) {
@@ -14,7 +14,6 @@ class QuestionScreen extends React.Component {
       questions: [],
       currentQuestion: {},
     };
-    this.answerValidation = this.answerValidation.bind(this);
   }
 
   async componentDidMount() {
@@ -27,22 +26,8 @@ class QuestionScreen extends React.Component {
     // console.log(this.state.currentQuestion);
   }
 
-  answerValidation(answer) {
-    let correctAnswer = "husky";
-    if (answer === correctAnswer) {
-      Alert.alert("Correct!");
-      this.setState({
-        score: this.state.score + 1,
-        currentQuestionIdx: this.state.currentQuestionIdx + 1,
-        progressBar: this.state.progressBar + 0.1,
-      });
-      // console.log(this.state.question[0], "here");
-    } else {
-      Alert.alert("Try again...");
-    }
-  }
-
   render() {
+    let questions = this.state.questions;
     return (
       <View style={styles.background}>
         <ProgressBar
@@ -52,39 +37,21 @@ class QuestionScreen extends React.Component {
           style={styles.progress}
         />
         <Text>Score: {this.state.score}</Text>
-        <View style={styles.imageContainer}>
-          <Image style={styles.image} source={require("../assets/husky.png")} />
-          {/* <Text style={styles.font}>{this.state.questions[0].question}</Text> */}
-        </View>
-        {/* <View style={styles.answersContainer}> */}
-        <View style={styles.answerOne}>
-          <AppButton
-            title="husky"
-            // accessibilityLabel="husky"
-            onPress={() => this.answerValidation("husky")}
-          />
-        </View>
-        <View style={styles.answerTwo}>
-          <AppButton
-            title="german shepherd"
-            // accessibilityLabel="husky"
-            onPress={() => this.answerValidation("german shepherd")}
-          />
-        </View>
-        <View style={styles.answerThree}>
-          <AppButton
-            title="beagle"
-            // accessibilityLabel="Answer Three"
-            onPress={() => this.answerValidation("beagle")}
-          />
-        </View>
-        <View style={styles.answerFour}>
-          <AppButton
-            title="corgi"
-            // accessibilityLabel="Answer Four"
-            onPress={() => this.answerValidation("corgi")}
-          />
-        </View>
+        <FlatList
+          data={questions}
+          keyExtractor={(question) => question.id.toString()}
+          renderItem={({ item }) => (
+            <QuestionComponent
+              question={item.question}
+              image={item.image}
+              answerOne={item.answerOne}
+              answerTwo={item.answerTwo}
+              answerThree={item.answerThree}
+              answerFour={item.answerFour}
+              correctAnswer={item.answerFour}
+            />
+          )}
+        />
       </View>
     );
   }
@@ -116,35 +83,6 @@ const styles = StyleSheet.create({
   },
   progress: {
     top: 30,
-  },
-  answerOne: {
-    // padding: 20,
-    width: "95%",
-    alignItems: "center",
-    justifyContent: "center",
-    top: 180,
-    margin: 10,
-  },
-  answerTwo: {
-    width: "95%",
-    alignItems: "center",
-    justifyContent: "center",
-    top: 190,
-    margin: 10,
-  },
-  answerThree: {
-    width: "95%",
-    alignItems: "center",
-    justifyContent: "center",
-    top: 200,
-    margin: 10,
-  },
-  answerFour: {
-    width: "95%",
-    alignItems: "center",
-    justifyContent: "center",
-    top: 210,
-    margin: 10,
   },
 });
 
