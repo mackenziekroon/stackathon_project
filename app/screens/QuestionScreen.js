@@ -2,60 +2,73 @@ import React from "react";
 import ProgressBar from "react-native-progress/Bar";
 import { StyleSheet, View, Image, Text, Alert } from "react-native";
 import AppButton from "../components/AppButton";
+import { questionData } from "../../data";
 
-function QuestionScreen(props) {
-  const answerValidation = (answer) => {
+class QuestionScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      score: 0,
+      currentQuestion: 0,
+    };
+    this.answerValidation = this.answerValidation.bind(this);
+  }
+
+  answerValidation(answer) {
     let correctAnswer = "husky";
     if (answer === correctAnswer) {
+      console.log(questionData, "1");
       Alert.alert("Correct!");
     } else {
       Alert.alert("Try again...");
     }
-  };
+  }
 
-  return (
-    <View style={styles.background}>
-      <ProgressBar
-        progress={0.1}
-        width={375}
-        color={"#505168"}
-        style={styles.progress}
-      />
-      <View style={styles.imageContainer}>
-        <Image style={styles.image} source={require("../assets/husky.png")} />
-        <Text style={styles.font}>Guess the breed...</Text>
-      </View>
-      {/* <View style={styles.answersContainer}> */}
-      <View style={styles.answerOne}>
-        <AppButton
-          title="husky"
-          // accessibilityLabel="husky"
-          onPress={() => answerValidation("husky")}
+  render() {
+    return (
+      <View style={styles.background}>
+        <ProgressBar
+          progress={0.1}
+          width={375}
+          color={"#505168"}
+          style={styles.progress}
         />
+        <View style={styles.imageContainer}>
+          <Image style={styles.image} source={require("../assets/husky.png")} />
+          <Text style={styles.font}>(\questionData.question</Text>
+        </View>
+        {/* <View style={styles.answersContainer}> */}
+        <View style={styles.answerOne}>
+          <AppButton
+            title="husky"
+            // accessibilityLabel="husky"
+            onPress={() => this.answerValidation("husky")}
+          />
+        </View>
+        <View style={styles.answerTwo}>
+          <AppButton
+            title="german shepherd"
+            // accessibilityLabel="husky"
+            onPress={() => this.answerValidation("german shepherd")}
+          />
+        </View>
+        <View style={styles.answerThree}>
+          <AppButton
+            title="beagle"
+            // accessibilityLabel="Answer Three"
+            onPress={() => this.answerValidation("beagle")}
+          />
+        </View>
+        <View style={styles.answerFour}>
+          <AppButton
+            title="corgi"
+            // accessibilityLabel="Answer Four"
+            onPress={() => this.answerValidation("corgi")}
+          />
+        </View>
       </View>
-      <View style={styles.answerTwo}>
-        <AppButton
-          title="german shepherd"
-          // accessibilityLabel="husky"
-          onPress={() => answerValidation("german shepherd")}
-        />
-      </View>
-      <View style={styles.answerThree}>
-        <AppButton
-          title="beagle"
-          // accessibilityLabel="Answer Three"
-          onPress={() => answerValidation("beagle")}
-        />
-      </View>
-      <View style={styles.answerFour}>
-        <AppButton
-          title="corgi"
-          // accessibilityLabel="Answer Four"
-          onPress={() => answerValidation("corgi")}
-        />
-      </View>
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
