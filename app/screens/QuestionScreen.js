@@ -21,7 +21,7 @@ class QuestionScreen extends React.Component {
     const { data } = await questionsApi.getQuestions();
 
     this.setState({
-      questions: [data],
+      questions: data,
       // currentQuestion: this.state.questions[0],
     });
     // console.log(this.state.currentQuestion);
@@ -36,7 +36,7 @@ class QuestionScreen extends React.Component {
         currentQuestionIdx: this.state.currentQuestionIdx + 1,
         progressBar: this.state.progressBar + 0.1,
       });
-      // console.log(this.state.question[0], "here");
+      console.log(this.state);
     } else {
       Alert.alert("Try again...");
     }
