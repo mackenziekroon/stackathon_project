@@ -1,5 +1,5 @@
-const db = require("./db");
-const Question = require("./models");
+const db = require("./server/db/db");
+const Question = require("./server/db/models/Question");
 
 async function seed() {
   await db.sync({ force: true });

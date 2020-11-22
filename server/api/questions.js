@@ -1,12 +1,13 @@
 const router = require("express").Router();
 
-const { Question } = require("../db/models");
+const Question = require("../db/models/Question");
 
+// mounted  on /api/questions
 router.get("/", async (req, res, next) => {
   try {
-    let questions = await Question.findAll();
-    console.log(questions);
-    res.send(questions);
+    let data = await Question.findAll();
+
+    res.send(data);
   } catch (error) {
     next(error);
   }
