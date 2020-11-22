@@ -12,7 +12,7 @@ class QuestionScreen extends React.Component {
       currentQuestionIdx: 0,
       progressBar: 0.1,
       questions: [],
-      // currentQuestion: this.state.questions[this.state.currentQuestionIdx],
+      currentQuestion: {},
     };
   }
 
@@ -21,13 +21,13 @@ class QuestionScreen extends React.Component {
 
     this.setState({
       questions: data,
-      // currentQuestion: this.state.questions[0],
+      currentQuestion: [data[this.state.currentQuestionIdx]],
     });
-    console.log(this.state);
+    console.log(this.state.currentQuestion);
   }
 
   render() {
-    let questions = this.state.questions;
+    let question = this.state.currentQuestion;
     return (
       <View style={styles.background}>
         <ProgressBar
@@ -38,12 +38,12 @@ class QuestionScreen extends React.Component {
         />
         <Text>Score: {this.state.score}</Text>
         <FlatList
-          data={questions}
+          data={question}
           keyExtractor={(question) => question.id.toString()}
           renderItem={({ item }) => (
             <QuestionComponent
-              question={item.question}
-              image={item.image}
+              question="hello!"
+              // image={item.image}
               answerOne={item.answerOne}
               answerTwo={item.answerTwo}
               answerThree={item.answerThree}
