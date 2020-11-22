@@ -9,19 +9,22 @@ class QuestionScreen extends React.Component {
     super(props);
     this.state = {
       score: 0,
-      currentQuestion: 0,
+      currentQuestionIdx: 0,
       progressBar: 0.1,
       questions: [],
+      currentQuestion: {},
     };
     this.answerValidation = this.answerValidation.bind(this);
   }
 
   async componentDidMount() {
     const { data } = await questionsApi.getQuestions();
-    console.log(data);
+
     this.setState({
       questions: [data],
+      // currentQuestion: this.state.questions[0],
     });
+    // console.log(this.state.currentQuestion);
   }
 
   answerValidation(answer) {
@@ -30,10 +33,10 @@ class QuestionScreen extends React.Component {
       Alert.alert("Correct!");
       this.setState({
         score: this.state.score + 1,
-        currentQuestion: this.state.currentQuestion + 1,
+        currentQuestionIdx: this.state.currentQuestionIdx + 1,
         progressBar: this.state.progressBar + 0.1,
       });
-      console.log(this.state);
+      // console.log(this.state.question[0], "here");
     } else {
       Alert.alert("Try again...");
     }
@@ -51,7 +54,7 @@ class QuestionScreen extends React.Component {
         <Text>Score: {this.state.score}</Text>
         <View style={styles.imageContainer}>
           <Image style={styles.image} source={require("../assets/husky.png")} />
-          <Text style={styles.font}>(\questionData.question</Text>
+          {/* <Text style={styles.font}>{this.state.questions[0].question}</Text> */}
         </View>
         {/* <View style={styles.answersContainer}> */}
         <View style={styles.answerOne}>
