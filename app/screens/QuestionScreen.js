@@ -13,38 +13,39 @@ class QuestionScreen extends React.Component {
       currentQuestionIdx: 0,
       progressBar: 0.1,
       questions: [],
-      currentQuestion: {},
+      currentQuestion: [],
     };
     this.answerValidation = this.answerValidation.bind(this);
   }
 
   async componentDidMount() {
     const { data } = await questionsApi.getQuestions();
-    console.log(data);
     this.setState({
       questions: data,
       currentQuestion: [data[this.state.currentQuestionIdx]],
     });
   }
 
-  answerValidation(answer) {
-    let correct = this.state.currentQuestion.correctAnswer;
-    console.log("correct", correct);
-    console.log("answer", answer);
-    if (answer === correct) {
+  answerValidation(answer, correctAnswer) {
+    if (answer === correctAnswer) {
       Alert.alert("Correct!");
       this.setState({
         score: this.state.score + 1,
         currentQuestionIdx: this.state.currentQuestionIdx + 1,
         progressBar: this.state.progressBar + 0.1,
+        currentQuestion: [this.state.questions[this.state.currentQuestionIdx]],
       });
     } else {
       Alert.alert("Sorry, wrong answer...");
       this.setState({
         currentQuestionIdx: this.state.currentQuestionIdx + 1,
         progressBar: this.state.progressBar + 0.1,
+        currentQuestion: [
+          this.state.currentQuestion[this.state.currentQuestionIdx],
+        ],
       });
     }
+    console.log("STATE", this.state);
   }
 
   render() {
@@ -63,18 +64,6 @@ class QuestionScreen extends React.Component {
           data={question}
           keyExtractor={(question) => question.id.toString()}
           renderItem={({ item }) => (
-            // (
-            // <QuestionComponent
-            //   question={item.question}
-            //   image={item.image}
-            //   answerOne={item.answerOne}
-            //   answerTwo={item.answerTwo}
-            //   answerThree={item.answerThree}
-            //   answerFour={item.answerFour}
-            //   correctAnswer={item.correctAnswer}
-            // />
-            // )
-
             <>
               <View style={styles.imageContainer}>
                 <Image
@@ -87,25 +76,33 @@ class QuestionScreen extends React.Component {
               <View style={styles.answerOne}>
                 <AppButton
                   title={item.answerOne}
-                  onPress={() => this.answerValidation(item.answerOne)}
+                  onPress={() =>
+                    this.answerValidation(item.answerOne, item.correctAnswer)
+                  }
                 />
               </View>
               <View style={styles.answerTwo}>
                 <AppButton
                   title={item.answerTwo}
-                  onPress={() => this.answerValidation(item.answerTwo)}
+                  onPress={() =>
+                    this.answerValidation(item.answerTwo, item.correctAnswer)
+                  }
                 />
               </View>
               <View style={styles.answerThree}>
                 <AppButton
                   title={item.answerThree}
-                  onPress={() => this.answerValidation(item.answerThree)}
+                  onPress={() =>
+                    this.answerValidation(item.answerThree, item.correctAnswer)
+                  }
                 />
               </View>
               <View style={styles.answerFour}>
                 <AppButton
                   title={item.answerFour}
-                  onPress={() => this.answerValidation(item.answerFour)}
+                  onPress={() =>
+                    this.answerValidation(item.answerFour, item.correctAnswer)
+                  }
                 />
               </View>
             </>
