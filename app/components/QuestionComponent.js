@@ -12,22 +12,23 @@ function QuestionComponent({
   answerFour,
   correctAnswer,
 }) {
-  const answerValidation = (answer) => {
-    console.log("answer--->", answer);
-    console.log("correct--->", correctAnswer);
-    let correct = correctAnswer;
-    if (answer === correct) {
-      Alert.alert("Correct!");
-      this.setState({
-        // score: this.state.score + 1,
-        currentQuestionIdx: this.state.currentQuestionIdx + 1,
-        progressBar: this.state.progressBar + 0.1,
-      });
-      // console.log(this.state.question[0], "here");
-    } else {
-      Alert.alert("Try again...");
-    }
-  };
+  // const answerValidation = (answer) => {
+  //   let correct = correctAnswer;
+  //   if (answer === correct) {
+  //     Alert.alert("Correct!");
+  //     this.setState({
+  //       score: this.score + 1,
+  //       currentQuestionIdx: this.currentQuestionIdx + 1,
+  //       progressBar: this.progressBar + 0.1,
+  //     });
+  //   } else {
+  //     Alert.alert("Sorry, wrong answer...");
+  //     this.setState({
+  //       currentQuestionIdx: this.currentQuestionIdx + 1,
+  //       progressBar: this.progressBar + 0.1,
+  //     });
+  //   }
+  // };
 
   return (
     <>
@@ -42,25 +43,25 @@ function QuestionComponent({
       <View style={styles.answerOne}>
         <AppButton
           title={answerOne}
-          onPress={() => answerValidation(answerOne)}
+          onPress={() => this.answerValidation(answerOne)}
         />
       </View>
       <View style={styles.answerTwo}>
         <AppButton
           title={answerTwo}
-          onPress={() => answerValidation(answerTwo)}
+          onPress={() => this.answerValidation(answerTwo)}
         />
       </View>
       <View style={styles.answerThree}>
         <AppButton
           title={answerThree}
-          onPress={() => answerValidation(answerThree)}
+          onPress={() => this.answerValidation(answerThree)}
         />
       </View>
       <View style={styles.answerFour}>
         <AppButton
           title={answerFour}
-          onPress={() => answerValidation(answerFour)}
+          onPress={() => this.answerValidation(answerFour)}
         />
       </View>
     </>

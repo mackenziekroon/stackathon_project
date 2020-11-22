@@ -14,6 +14,7 @@ class QuestionScreen extends React.Component {
       questions: [],
       currentQuestion: {},
     };
+    this.answerValidation = this.answerValidation.bind(this);
   }
 
   async componentDidMount() {
@@ -23,6 +24,24 @@ class QuestionScreen extends React.Component {
       questions: data,
       currentQuestion: [data[this.state.currentQuestionIdx]],
     });
+  }
+
+  answerValidation(answer) {
+    let correct = correctAnswer;
+    if (answer === correct) {
+      Alert.alert("Correct!");
+      this.setState({
+        score: this.state.score + 1,
+        currentQuestionIdx: this.state.currentQuestionIdx + 1,
+        progressBar: this.state.progressBar + 0.1,
+      });
+    } else {
+      Alert.alert("Sorry, wrong answer...");
+      this.setState({
+        currentQuestionIdx: this.state.currentQuestionIdx + 1,
+        progressBar: this.state.progressBar + 0.1,
+      });
+    }
   }
 
   render() {
