@@ -10,6 +10,7 @@ class QuestionScreen extends React.Component {
     this.state = {
       score: 0,
       currentQuestion: 0,
+      progressBar: 0.1,
     };
     this.answerValidation = this.answerValidation.bind(this);
   }
@@ -17,8 +18,13 @@ class QuestionScreen extends React.Component {
   answerValidation(answer) {
     let correctAnswer = "husky";
     if (answer === correctAnswer) {
-      console.log(questionData, "1");
       Alert.alert("Correct!");
+      this.setState({
+        score: this.state.score + 1,
+        currentQuestion: this.state.currentQuestion + 1,
+        progressBar: this.state.progressBar + 0.1,
+      });
+      console.log(this.state);
     } else {
       Alert.alert("Try again...");
     }
@@ -28,11 +34,12 @@ class QuestionScreen extends React.Component {
     return (
       <View style={styles.background}>
         <ProgressBar
-          progress={0.1}
+          progress={this.state.progressBar}
           width={375}
           color={"#505168"}
           style={styles.progress}
         />
+        <Text>Score: {this.state.score}</Text>
         <View style={styles.imageContainer}>
           <Image style={styles.image} source={require("../assets/husky.png")} />
           <Text style={styles.font}>(\questionData.question</Text>
