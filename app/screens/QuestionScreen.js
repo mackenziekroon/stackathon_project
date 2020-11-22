@@ -3,6 +3,7 @@ import ProgressBar from "react-native-progress/Bar";
 import { StyleSheet, View, Image, Text, Alert, FlatList } from "react-native";
 import questionsApi from "../../server/api/fetchingData";
 import QuestionComponent from "../components/QuestionComponent";
+import AppButton from "../components/AppButton";
 
 class QuestionScreen extends React.Component {
   constructor(props) {
@@ -27,7 +28,9 @@ class QuestionScreen extends React.Component {
   }
 
   answerValidation(answer) {
-    let correct = correctAnswer;
+    let correct = this.state.currentQuestion.correctAnswer;
+    console.log("correct", correct);
+    console.log("answer", answer);
     if (answer === correct) {
       Alert.alert("Correct!");
       this.setState({
@@ -60,15 +63,52 @@ class QuestionScreen extends React.Component {
           data={question}
           keyExtractor={(question) => question.id.toString()}
           renderItem={({ item }) => (
-            <QuestionComponent
-              question={item.question}
-              image={item.image}
-              answerOne={item.answerOne}
-              answerTwo={item.answerTwo}
-              answerThree={item.answerThree}
-              answerFour={item.answerFour}
-              correctAnswer={item.correctAnswer}
-            />
+            // (
+            // <QuestionComponent
+            //   question={item.question}
+            //   image={item.image}
+            //   answerOne={item.answerOne}
+            //   answerTwo={item.answerTwo}
+            //   answerThree={item.answerThree}
+            //   answerFour={item.answerFour}
+            //   correctAnswer={item.correctAnswer}
+            // />
+            // )
+
+            <>
+              <View style={styles.imageContainer}>
+                <Image
+                  source={{ uri: item.image }}
+                  style={{ width: "100%", height: 200, top: 100 }}
+                />
+
+                <Text style={styles.font}>{item.question}</Text>
+              </View>
+              <View style={styles.answerOne}>
+                <AppButton
+                  title={item.answerOne}
+                  onPress={() => this.answerValidation(item.answerOne)}
+                />
+              </View>
+              <View style={styles.answerTwo}>
+                <AppButton
+                  title={item.answerTwo}
+                  onPress={() => this.answerValidation(item.answerTwo)}
+                />
+              </View>
+              <View style={styles.answerThree}>
+                <AppButton
+                  title={item.answerThree}
+                  onPress={() => this.answerValidation(item.answerThree)}
+                />
+              </View>
+              <View style={styles.answerFour}>
+                <AppButton
+                  title={item.answerFour}
+                  onPress={() => this.answerValidation(item.answerFour)}
+                />
+              </View>
+            </>
           )}
         />
       </View>
@@ -102,6 +142,35 @@ const styles = StyleSheet.create({
   },
   progress: {
     top: 30,
+  },
+  answerOne: {
+    // padding: 20,
+    width: "95%",
+    alignItems: "center",
+    justifyContent: "center",
+    top: 180,
+    margin: 10,
+  },
+  answerTwo: {
+    width: "95%",
+    alignItems: "center",
+    justifyContent: "center",
+    top: 190,
+    margin: 10,
+  },
+  answerThree: {
+    width: "95%",
+    alignItems: "center",
+    justifyContent: "center",
+    top: 200,
+    margin: 10,
+  },
+  answerFour: {
+    width: "95%",
+    alignItems: "center",
+    justifyContent: "center",
+    top: 210,
+    margin: 10,
   },
 });
 
