@@ -12,7 +12,7 @@ class QuestionScreen extends React.Component {
       currentQuestionIdx: 0,
       progressBar: 0.1,
       questions: [],
-      currentQuestion: {},
+      // currentQuestion: this.state.questions[this.state.currentQuestionIdx],
     };
   }
 
@@ -20,10 +20,10 @@ class QuestionScreen extends React.Component {
     const { data } = await questionsApi.getQuestions();
 
     this.setState({
-      questions: [data],
+      questions: data,
       // currentQuestion: this.state.questions[0],
     });
-    // console.log(this.state.currentQuestion);
+    console.log(this.state);
   }
 
   render() {
