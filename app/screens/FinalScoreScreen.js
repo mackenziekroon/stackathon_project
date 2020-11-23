@@ -15,7 +15,7 @@ import styles from "../components/styles";
 
 function FinalScoreScreen({ navigation }) {
   const pressHandler = () => {
-    props.navigation.navigate("Home");
+    navigation.navigate("Home");
   };
 
   // const { score } = route.params;
