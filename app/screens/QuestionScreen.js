@@ -66,7 +66,6 @@ class QuestionScreen extends React.Component {
   }
 
   render() {
-    console.log(this.state.score, "score");
     let question = this.state.currentQuestion;
 
     return (
@@ -154,6 +153,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     top: 130,
+    left: 130,
     textDecorationColor: "#505168",
     fontSize: 20,
   },
