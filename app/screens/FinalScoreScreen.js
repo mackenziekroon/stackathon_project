@@ -13,17 +13,17 @@ import AppButton from "../components/AppButton";
 
 import styles from "../components/styles";
 
-function FinalScoreScreen(props) {
+function FinalScoreScreen({ navigation }) {
   const pressHandler = () => {
     props.navigation.navigate("Home");
   };
 
   // const { score } = route.params;
-  console.log(props);
+  const score = navigation.state.params.score;
   return (
     <View style={styles.background}>
       <View style={styles.logoContainer}>
-        <Text style={styles.text}>Final Score: ...</Text>
+        <Text style={styles.text}>Final Score: {score}</Text>
       </View>
       <View style={styles.buttonContainer}>
         <AppButton title="Play Again" onPress={pressHandler} />
