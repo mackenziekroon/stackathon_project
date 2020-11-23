@@ -11,7 +11,7 @@ class QuestionScreen extends React.Component {
     this.state = {
       score: 0,
       currentQuestionIdx: 0,
-      progressBar: 0.1,
+      progressBar: 0.0,
       questions: [],
       currentQuestion: [],
     };
@@ -33,7 +33,9 @@ class QuestionScreen extends React.Component {
         score: this.state.score + 1,
         currentQuestionIdx: this.state.currentQuestionIdx + 1,
         progressBar: this.state.progressBar + 0.1,
-        currentQuestion: [this.state.questions[this.state.currentQuestionIdx]],
+        currentQuestion: [
+          this.state.questions[this.state.currentQuestionIdx + 1],
+        ],
       });
     } else {
       Alert.alert("Sorry, wrong answer...");
@@ -41,15 +43,15 @@ class QuestionScreen extends React.Component {
         currentQuestionIdx: this.state.currentQuestionIdx + 1,
         progressBar: this.state.progressBar + 0.1,
         currentQuestion: [
-          this.state.currentQuestion[this.state.currentQuestionIdx],
+          this.state.questions[this.state.currentQuestionIdx + 1],
         ],
       });
     }
-    console.log("STATE", this.state);
   }
 
   render() {
     let question = this.state.currentQuestion;
+    console.log("STATE", this.state);
     return (
       <View style={styles.background}>
         <ProgressBar
