@@ -1,9 +1,17 @@
 import React from "react";
 import ProgressBar from "react-native-progress/Bar";
-import { StyleSheet, View, Image, Text, Alert, FlatList } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  Alert,
+  FlatList,
+  Button,
+} from "react-native";
 import questionsApi from "../../server/api/fetchingData";
-import QuestionComponent from "../components/QuestionComponent";
 import AppButton from "../components/AppButton";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 class QuestionScreen extends React.Component {
   constructor(props) {
@@ -11,11 +19,12 @@ class QuestionScreen extends React.Component {
     this.state = {
       score: 0,
       currentQuestionIdx: 0,
-      progressBar: 0.0,
+      progressBar: 0,
       questions: [],
       currentQuestion: [],
     };
     this.answerValidation = this.answerValidation.bind(this);
+    this.navigationHandler = this.navigationHandler.bind(this);
   }
 
   async componentDidMount() {
@@ -26,9 +35,15 @@ class QuestionScreen extends React.Component {
     });
   }
 
+  navigationHandler = () => {
+    let score = this.state.score;
+    this.props.navigation.navigate("Score", score);
+  };
+
   answerValidation(answer, correctAnswer) {
     if (answer === correctAnswer) {
       Alert.alert("Correct!");
+
       this.setState({
         score: this.state.score + 1,
         currentQuestionIdx: this.state.currentQuestionIdx + 1,
@@ -39,6 +54,7 @@ class QuestionScreen extends React.Component {
       });
     } else {
       Alert.alert("Sorry, wrong answer...");
+
       this.setState({
         currentQuestionIdx: this.state.currentQuestionIdx + 1,
         progressBar: this.state.progressBar + 0.1,
@@ -50,8 +66,9 @@ class QuestionScreen extends React.Component {
   }
 
   render() {
+    console.log(this.state.currentQuestionIdx);
     let question = this.state.currentQuestion;
-    console.log("STATE", this.state);
+
     return (
       <View style={styles.background}>
         <ProgressBar
@@ -60,7 +77,16 @@ class QuestionScreen extends React.Component {
           color={"#505168"}
           style={styles.progress}
         />
-        <Text>Score: {this.state.score}</Text>
+        <Text style={styles.score}>Score: {this.state.score}</Text>
+        <Text style={styles.questionProgress}>
+          {this.state.currentQuestionIdx + 1}/10
+        </Text>
+        <Button
+          title="complete"
+          onPress={this.navigationHandler}
+          style={styles.completeButton}
+          color="#505168"
+        />
 
         <FlatList
           data={question}
@@ -122,54 +148,60 @@ const styles = StyleSheet.create({
   },
   image: {
     padding: 20,
-    top: 130,
+    top: 100,
   },
-  // imageContainer: {
-  //   backgroundColor: "#eaefd3",
-  //   borderRadius: 25,
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   width: "100%",
-  //   top: 100,
-  // },
   font: {
     justifyContent: "center",
     alignItems: "center",
-    top: 160,
+    top: 130,
     textDecorationColor: "#505168",
     fontSize: 20,
   },
   progress: {
+    left: 20,
     top: 30,
+    width: "90%",
   },
   answerOne: {
     // padding: 20,
     width: "95%",
     alignItems: "center",
     justifyContent: "center",
-    top: 180,
+    top: 150,
     margin: 10,
   },
   answerTwo: {
     width: "95%",
     alignItems: "center",
     justifyContent: "center",
-    top: 190,
+    top: 160,
     margin: 10,
   },
   answerThree: {
     width: "95%",
     alignItems: "center",
     justifyContent: "center",
-    top: 200,
+    top: 170,
     margin: 10,
   },
   answerFour: {
     width: "95%",
     alignItems: "center",
     justifyContent: "center",
-    top: 210,
+    top: 180,
     margin: 10,
+  },
+  questionProgress: {
+    left: 350,
+    top: 70,
+  },
+  completeButton: {
+    left: 350,
+    top: 70,
+  },
+  score: {
+    top: 70,
+    left: 10,
   },
 });
 
