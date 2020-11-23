@@ -19,7 +19,7 @@ function FinalScoreScreen(props) {
   };
 
   // const { score } = route.params;
-  console.log(props.state);
+  console.log(props);
   return (
     <View style={styles.background}>
       <View style={styles.logoContainer}>

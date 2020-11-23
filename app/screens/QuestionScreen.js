@@ -37,7 +37,7 @@ class QuestionScreen extends React.Component {
 
   navigationHandler = () => {
     let score = this.state.score;
-    this.props.navigation.navigate("Score", score);
+    this.props.navigation.navigate("Score", { score: score });
   };
 
   answerValidation(answer, correctAnswer) {
@@ -66,7 +66,7 @@ class QuestionScreen extends React.Component {
   }
 
   render() {
-    console.log(this.state.currentQuestionIdx);
+    console.log(this.state.score, "score");
     let question = this.state.currentQuestion;
 
     return (
@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
     width: "90%",
   },
   answerOne: {
-    // padding: 20,
     width: "95%",
     alignItems: "center",
     justifyContent: "center",
@@ -193,7 +192,7 @@ const styles = StyleSheet.create({
   },
   questionProgress: {
     left: 350,
-    top: 70,
+    top: 50,
   },
   completeButton: {
     left: 350,
